@@ -1,0 +1,6 @@
+Notify-send for Kindle is simple notification tool for using in seld-made scripts.
+It based on sources of launchpad (yet another hotkey manager for Kindle).
+Also there is script example (gmail.sh) that shows count of new mails in your gmail account.
+
+Usage:
+$ notify-send "Message you want to show"
