@@ -1,4 +1,5 @@
 #!/bin/sh
+#dbus-send --system /default com.lab126.wifid.cmConnected && sleep 10
 MPLAYER=/mnt/us/fbKindle/mplayer/mplayer # mplayer binary (or any other player)
 USER=username # GMail account nickname
 PASS=password # GMail account password
@@ -17,3 +18,4 @@ $MPLAYER "$SOUND1" & /mnt/us/notify/notify-send "There is $COUNT new $WORD";
 else
 $MPLAYER "$SOUND2" & /mnt/us/notify/notify-send "No new mails =(";
 fi
+#dbus-send --system /default com.lab126.wifid.cmNotconnected
