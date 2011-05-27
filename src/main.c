@@ -45,7 +45,7 @@
 
 static char proc_dir[MAXPATH] ;
 
-static FILE * diag_fp = NULL ;
+//static FILE * diag_fp = NULL ;
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
@@ -64,7 +64,17 @@ int main(int argc, char **av)
 {
 	launchpad_init();
 	if(argc>1)
-		show_message(av[1]);
+	{
+	    if(argc>2)
+	    {
+		int time = atoi(av[2]);
+		if(time < 1)
+		    time = 1;
+		show_message(av[1], time);
+	    }
+	    else
+		show_message(av[1], 2);
+	}
 	return EXIT_SUCCESS;
 }
 

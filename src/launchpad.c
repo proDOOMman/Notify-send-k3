@@ -51,15 +51,19 @@ void launchpad_deinit(void)
 	}
 }
 
-int show_message(char* string)
+int show_message(char* string, int time)
 {
+	if(time < 1)
+	    time = 1;
+	int len = strlen(string);
+	int count = (int)len/MAXLENGTH+1;
 	pixmap_t *statusbar ;
-	statusbar = statusbar_show(pfbscreen) ;
-	statusbar_text(pfbscreen, statusbar, string) ;
+	statusbar = statusbar_show(pfbscreen, count);
+	statusbar_text(pfbscreen, statusbar, string, count);
 	msdelay(400);
-	statusbar_flash(pfbscreen, statusbar, 1, 800, 1) ;
-	msdelay(2000);
-	statusbar_hide(pfbscreen, statusbar) ;
+	statusbar_flash(pfbscreen, statusbar, 1, 800, 1, count);
+	msdelay(time*1000);
+	statusbar_hide(pfbscreen, statusbar, count);
 	return 0;
 }
 

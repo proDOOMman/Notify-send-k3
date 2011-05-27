@@ -7,9 +7,11 @@
 
 #define STATUSBAR_HEIGHT 40
 
-pixmap_t * statusbar_show(fbscreen_t *pscreen) ;
-void statusbar_hide(fbscreen_t *pscreen, pixmap_t *psav) ;
-void statusbar_text(fbscreen_t *pscreen, pixmap_t *psb, char *p) ;
-void statusbar_flash(fbscreen_t *pscreen, pixmap_t *psb, int count, int tmo, int waitflag) ;
+#define MAXLENGTH 45
+
+pixmap_t * statusbar_show(fbscreen_t *pscreen, int lines) ;
+void statusbar_hide(fbscreen_t *pscreen, pixmap_t *psav, int lines) ;
+void statusbar_text(fbscreen_t *pscreen, pixmap_t *psb, char *p, int lines) ;
+void statusbar_flash(fbscreen_t *pscreen, pixmap_t *psb, int count, int tmo, int waitflag, int lines) ;
 
 #endif

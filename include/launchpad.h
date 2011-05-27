@@ -103,7 +103,7 @@ int has_console(void) ;
 
 int launchpad_init(void) ;
 void launchpad_deinit(void) ;
-int show_message(char* string);
+int show_message(char* string, int time);
 
 extern void msdelay(int) ;
 

@@ -24,39 +24,47 @@
 #include "pixop.h"
 #include "statusbar.h"
 
-pixmap_t * statusbar_show(fbscreen_t *pscreen)
+pixmap_t * statusbar_show(fbscreen_t *pscreen, int lines)
 {
 	pixmap_t *psav ;
 
-	psav = pixbuf_alloc(pscreen->surface.width, STATUSBAR_HEIGHT) ;
+	psav = pixbuf_alloc(pscreen->surface.width, STATUSBAR_HEIGHT*lines) ;
 	screen_get_pixmap(pscreen, 0, 0, psav) ;
 
 	screen_rect_at(pscreen, 0, 0,
-			pscreen->surface.width, STATUSBAR_HEIGHT, 0) ;
+			pscreen->surface.width, STATUSBAR_HEIGHT*lines, 0) ;
 	screen_update_area(pscreen, UMODE_PARTIAL, 0, 0,
-			pscreen->surface.width, STATUSBAR_HEIGHT, NULL) ;
+			pscreen->surface.width, STATUSBAR_HEIGHT*lines, NULL) ;
 
 	return psav ;
 }
 
-void statusbar_hide(fbscreen_t *pscreen, pixmap_t *psav)
+void statusbar_hide(fbscreen_t *pscreen, pixmap_t *psav, int lines)
 {
 
 	screen_put_pixmap(pscreen, 0, 0, psav ) ;
 	screen_update_area(pscreen, UMODE_FULL, 0, 0,
-			pscreen->surface.width, STATUSBAR_HEIGHT, NULL) ;
+			pscreen->surface.width, STATUSBAR_HEIGHT*lines, NULL) ;
 	pixbuf_free(psav) ;
 }
 
-void statusbar_text(fbscreen_t *pscreen, pixmap_t *psb, char *p)
+void statusbar_text(fbscreen_t *pscreen, pixmap_t *psb, char *p, int lines)
 {
 	screen_rect_at(pscreen, 0, 0,
-			pscreen->surface.width, STATUSBAR_HEIGHT, 0) ;
-	screen_string_at(pscreen, 30, 10, p ) ;
+			pscreen->surface.width, STATUSBAR_HEIGHT*lines, 0) ;
+	int count = 0;
+	while(count<strlen(p))
+	{
+	    char str[MAXLENGTH+1];
+	    str[MAXLENGTH] = '\0';
+	    strncpy(str,p+count,MAXLENGTH);
+	    screen_string_at(pscreen, 30, 10+STATUSBAR_HEIGHT*count/MAXLENGTH, str);
+	    count += MAXLENGTH;
+	}
 }
 
-void statusbar_flash(fbscreen_t *pscreen, pixmap_t *psb, int count, int tmo, int waitflag)
+void statusbar_flash(fbscreen_t *pscreen, pixmap_t *psb, int count, int tmo, int waitflag, int lines)
 {
 	screen_flash_area(pscreen, count, 0, 0,
-		pscreen->surface.width, STATUSBAR_HEIGHT, tmo, waitflag) ;
+		pscreen->surface.width, STATUSBAR_HEIGHT*lines, tmo, waitflag) ;
 }
