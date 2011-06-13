@@ -10,7 +10,7 @@ SOUND2=/mnt/us/KDE-Sys-App-Message.ogg # No new mail sound
 
 #check wlan:
 if [ `lipc-get-prop com.lab126.wan powerState` -ne 1 ]; then
-/mnt/us/notify/notify-send "Please, enable WIFI/3G first"
+/mnt/us/notify/notify-send "Please, enable WIFI first"
 exit;
 fi
 
