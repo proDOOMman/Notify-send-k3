@@ -56,7 +56,9 @@ int show_message(char* string, int time)
 	if(time < 1)
 	    time = 1;
 	int len = strlen(string);
-	int count = (int)len/MAXLENGTH+1;
+	if(len < 1)
+	    return 0;
+	int count = (int)(len-1)/MAXLENGTH+1;
 	pixmap_t *statusbar ;
 	statusbar = statusbar_show(pfbscreen, count);
 	statusbar_text(pfbscreen, statusbar, string, count);
